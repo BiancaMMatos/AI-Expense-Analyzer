@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct ExpenseCard: View {
+    
+    var category: Category
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            RoundedRectangle(cornerRadius: 40, style: .continuous)
+                .fill(category.color)
+                .shadow(radius: 1.6)
+                .frame(height: 150.0)
+                .accessibilityIdentifier("expenseCard:\(category.rawValue)")
+            
+            Text(category.rawValue.capitalized)
+                .font(.title2)
+                .fontWeight(.heavy)
+                .foregroundStyle(.white)
+                .lineLimit(0)
+            
+        }
+        
     }
 }
 
 #Preview {
-    ExpenseCard()
+    ExpenseCard(category: .transportation )
 }

@@ -9,7 +9,21 @@ import SwiftUI
 
 struct InsightCard: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { reader in
+            ZStack {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(.background)
+                    .shadow(radius: 1.6)
+                    .frame(width: (reader.size.width * 0.93), height: (reader.size.width * 0.53))
+                    .padding(.horizontal, reader.size.width * 0.04)
+                
+                Text("Texto")
+                    .font(.title2)
+                    .foregroundStyle(.gray)
+                    .lineLimit(0)
+                    
+            }
+        }
     }
 }
 
