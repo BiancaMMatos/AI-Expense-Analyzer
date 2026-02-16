@@ -8,8 +8,60 @@
 import SwiftUI
 
 struct HomeView: View {
+    
     var body: some View {
-        Text("HomeView")
+        NavigationStack {
+            ZStack {
+                
+                LinearGradient(colors: [
+                    .yellow, .black
+                ], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+                
+                VStack(alignment: .center) {
+                    Text("Hello, Bianca!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(.leading, -150)
+                        .padding(.top, 1)
+                    
+                    InsightCard()
+                        .padding(.top, 10)
+                        .accessibilityIdentifier("homeView:insightCard")
+                    
+                    ScrollView(.vertical) {
+                        
+                        LazyVGrid(columns: [
+                            GridItem(.flexible()),
+                            GridItem(.flexible())
+                        ], content: {
+                            ForEach(Category.categories, id: \.self) { category in
+                                NavigationLink(destination: ExpensesCategoryView(category: category)) {
+                                    ExpenseCard(category: category )
+                                        .padding(.horizontal, 10)
+                                }
+                            }
+                        })
+                        
+                    }
+                    .padding(.top, -60)
+                    .padding(.bottom, -10)
+                    
+                }
+                .toolbar {
+                    ToolbarItem {
+                        NavigationLink {
+                            AddExpenseView()
+                                .accessibilityIdentifier("homeView:addExpense")
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
     }
 }
 
