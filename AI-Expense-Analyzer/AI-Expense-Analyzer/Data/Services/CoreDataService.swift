@@ -5,4 +5,8 @@
 //  Created by Bianca Maciel on 15/02/26.
 //
 
-import Foundation
+import CoreData
+
+final class CoreDataService {
+    
+}

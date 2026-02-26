@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct GenerateInsightUseCase {
+    private var repository: ExpenseRepositoryProtocol
+    
+    func generateInsight() {
+        repository.fetchInsitedExpenses()
+    }
+}
