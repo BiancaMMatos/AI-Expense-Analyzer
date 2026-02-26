@@ -9,10 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @StateObject private var vm = HomeViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                
                 LinearGradient(colors: [
                     .yellow, .black
                 ], startPoint: .top, endPoint: .bottom)
@@ -27,6 +28,7 @@ struct HomeView: View {
                     
                     InsightCard()
                         .padding(.top, 10)
+                        .padding(.bottom, -10)
                         .accessibilityIdentifier("homeView:insightCard")
                     
                     ScrollView(.vertical) {
