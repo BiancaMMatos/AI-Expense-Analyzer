@@ -18,17 +18,22 @@ enum Category: String {
     var color: Color {
         switch self {
         case .food:
-                .yellow
+                .init(.systemYellow)
+            
         case .transportation:
-                .green
+                .init(.systemGreen)
+            
         case .housing:
-                .blue
+                .init(.systemBlue)
+            
         case .health:
-                .red
+                .init(.systemRed)
+            
         case .entertainment:
-                .orange
+                .init(.systemOrange)
+            
         case .lifestyle:
-                .purple
+                .init(.systemPurple)
         }
     }
     

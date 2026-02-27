@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct InsightCard: View {
+    
+    @Environment(\.colorScheme) private var colorScheme
+    
     var body: some View {
         GeometryReader { reader in
             ZStack {
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(.background)
-                    .shadow(radius: 1.6)
+                    .fill(colorScheme == .dark ? .black : .white)
+                    .shadow(color: colorScheme == .dark ? .white : .gray ,radius: 5.0)
                     .frame(width: (reader.size.width * 0.93), height: (reader.size.width * 0.53))
                     .padding(.horizontal, reader.size.width * 0.04)
                 
@@ -21,7 +24,6 @@ struct InsightCard: View {
                     .font(.title2)
                     .foregroundStyle(.gray)
                     .lineLimit(0)
-                    
             }
         }
     }

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct AddExpenseView: View {
     var body: some View {
-        Text("AddExpenseView")
+        ZStack {
+            Color(.systemBackground)
+            Text("AddExpenseView")
+        }
     }
 }
 

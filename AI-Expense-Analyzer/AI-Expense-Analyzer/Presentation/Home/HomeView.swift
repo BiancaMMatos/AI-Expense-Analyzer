@@ -14,9 +14,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(colors: [
-                    .yellow, .black
-                ], startPoint: .top, endPoint: .bottom)
+                Color(.systemBackground)
                 .ignoresSafeArea()
                 
                 VStack(alignment: .center) {
@@ -57,8 +55,8 @@ struct HomeView: View {
                                 .accessibilityIdentifier("homeView:addExpense")
                         } label: {
                             Image(systemName: "plus")
+                                .foregroundStyle(.white)
                         }
-                        
                     }
                 }
             }
