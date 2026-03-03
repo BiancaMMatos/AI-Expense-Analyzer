@@ -8,10 +8,73 @@
 import SwiftUI
 
 struct AddExpenseView: View {
+    
+    @State private var value: String = ""
+    @Environment(\.colorScheme) private var colorScheme
+    
     var body: some View {
         ZStack {
             Color(.systemBackground)
-            Text("AddExpenseView")
+            VStack(alignment: .center) {
+                Text("New Expense")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.trailing, 200)
+                
+                Button {
+                    print("button pressed")
+                    
+                } label: {
+                    Image(systemName: "camera")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .foregroundStyle(colorScheme == .dark ? .white : .black)
+                        .padding(20)
+                        .background(Color(.systemGray5))
+                        .clipShape(Circle())
+                        .shadow(radius: 5.0)
+                }
+                
+                Form {
+                    Section {
+                        TextField("Value", text: $value)
+                            .font(.callout)
+                            .padding()
+                        
+                    } header: {
+                        Text("Value Info")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(colorScheme == .dark ? .white : .gray)
+                    }
+
+                }
+                .padding(.top, 10)
+                
+                LazyVGrid(columns: [
+                    GridItem(.flexible()),
+                    GridItem(.flexible())
+                ]) {
+                    ForEach(Category.categories, id: \.self) { category in
+                        Button {
+                            print("button pressed")
+                            
+                        } label: {
+                            Image(systemName: category.icon)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
+                                .foregroundStyle(colorScheme == .dark ? .white : .black)
+                                .padding(20)
+                                .background(Color(.systemGray5))
+                                .clipShape(Circle())
+                                .shadow(radius: 5.0)
+                        }
+                    }
+                }
+            }
+            
         }
     }
 }

@@ -37,6 +37,23 @@ enum Category: String {
         }
     }
     
+    var icon: String {
+        switch self {
+        case .food:
+            "fork.knife"
+        case .transportation:
+            "car.fill"
+        case .housing:
+            "house.fill"
+        case .health:
+            "stethoscope"
+        case .entertainment:
+            "theatermasks.fill"
+        case .lifestyle:
+            "figure.strengthtraining.functional"
+        }
+    }
+    
     static let categories: [Category] = [
         Category.food, Category.transportation, Category.housing, Category.health, Category.entertainment, Category.lifestyle
     ]

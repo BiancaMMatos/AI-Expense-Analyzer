@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @Environment(\.colorScheme) private var colorScheme
     @StateObject private var vm = HomeViewModel()
     
     var body: some View {
@@ -55,7 +56,7 @@ struct HomeView: View {
                                 .accessibilityIdentifier("homeView:addExpense")
                         } label: {
                             Image(systemName: "plus")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(colorScheme == .dark ? .white : .black)
                         }
                     }
                 }
