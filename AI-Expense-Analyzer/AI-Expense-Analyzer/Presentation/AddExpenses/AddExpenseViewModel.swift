@@ -8,13 +8,19 @@
 import Combine
 
 final class AddExpenseViewModel: ObservableObject {
-    let categoryUseCase: CategoryUseCase
+    let expenseUseCase: ExpenseUseCase
+    let categoryUseCase: CategoryUseCaseProtocol
     
-    init(categoryUseCase: CategoryUseCase) {
+    init(expenseUseCase: ExpenseUseCase, categoryUseCase: CategoryUseCaseProtocol) {
+        self.expenseUseCase = expenseUseCase
         self.categoryUseCase = categoryUseCase
     }
     
     func selectCategoryFromImage() {
         categoryUseCase.selectCategory()
+    }
+    
+    func saveExpense() {
+        expenseUseCase.saveExpense()
     }
 }

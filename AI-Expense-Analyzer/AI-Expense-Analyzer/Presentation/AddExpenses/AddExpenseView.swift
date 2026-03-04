@@ -10,6 +10,7 @@ import SwiftUI
 struct AddExpenseView: View {
     
     @State private var value: String = ""
+    @StateObject private var viewModel = AddExpenseViewModelFactory.makeViewModel()
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
@@ -22,7 +23,7 @@ struct AddExpenseView: View {
                     .padding(.trailing, 200)
                 
                 Button {
-                    print("button pressed")
+                    print("camera button pressed")
                     
                 } label: {
                     Image(systemName: "camera.fill")
@@ -63,7 +64,8 @@ struct AddExpenseView: View {
                 ], spacing: 30.0) {
                     ForEach(Category.categories, id: \.self) { category in
                         Button {
-                            print("button pressed")
+                            print("category button selected")
+                            viewModel.selectCategoryFromImage()
                             
                         } label: {
                             Image(systemName: category.icon)
@@ -82,6 +84,7 @@ struct AddExpenseView: View {
                 
                 Button {
                     print("Saved")
+                    viewModel.saveExpense()
                     
                 } label: {
                     ZStack {

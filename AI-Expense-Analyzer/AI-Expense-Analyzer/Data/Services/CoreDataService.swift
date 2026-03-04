@@ -7,6 +7,10 @@
 
 import CoreData
 
-final class CoreDataService {
+final class CoreDataService: DataService {
+    func saveData() {
+        
+    }
+    
     
 }
