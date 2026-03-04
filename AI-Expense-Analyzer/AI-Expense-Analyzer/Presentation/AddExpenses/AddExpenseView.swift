@@ -25,7 +25,7 @@ struct AddExpenseView: View {
                     print("button pressed")
                     
                 } label: {
-                    Image(systemName: "camera")
+                    Image(systemName: "camera.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 25, height: 25)
@@ -50,7 +50,11 @@ struct AddExpenseView: View {
                     }
 
                 }
-                .padding(.top, 10)
+                .scrollContentBackground(.hidden)
+                .background(Color(.systemGray5))
+                .padding(20)
+                .clipShape(RoundedRectangle(cornerRadius: 40))
+            
                 
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
@@ -75,6 +79,26 @@ struct AddExpenseView: View {
                     }
                 }
                 .padding(50)
+                
+                Button {
+                    print("Saved")
+                    
+                } label: {
+                    ZStack {
+                        
+                        Text("Save")
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .tint(.black)
+                            .padding(.horizontal, 50)
+                            .padding(15)
+                            .background(Color(.systemYellow))
+                            .clipShape(RoundedRectangle(cornerRadius: 50.0))
+                            .accessibilityIdentifier("addExpense:saveButton")
+                    }
+                }
+
+                
             }
             
         }
