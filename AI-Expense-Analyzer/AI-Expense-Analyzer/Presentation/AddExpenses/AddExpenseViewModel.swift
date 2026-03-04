@@ -5,4 +5,16 @@
 //  Created by Bianca Maciel on 15/02/26.
 //
 
-import Foundation
+import Combine
+
+final class AddExpenseViewModel: ObservableObject {
+    let categoryUseCase: CategoryUseCase
+    
+    init(categoryUseCase: CategoryUseCase) {
+        self.categoryUseCase = categoryUseCase
+    }
+    
+    func selectCategoryFromImage() {
+        categoryUseCase.selectCategory()
+    }
+}

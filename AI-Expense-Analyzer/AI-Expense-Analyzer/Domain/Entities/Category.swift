@@ -18,17 +18,39 @@ enum Category: String {
     var color: Color {
         switch self {
         case .food:
-                .yellow
+                .init(.systemYellow)
+            
         case .transportation:
-                .green
+                .init(.systemGreen)
+            
         case .housing:
-                .blue
+                .init(.systemBlue)
+            
         case .health:
-                .red
+                .init(.systemRed)
+            
         case .entertainment:
-                .orange
+                .init(.systemOrange)
+            
         case .lifestyle:
-                .purple
+                .init(.systemPurple)
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .food:
+            "fork.knife"
+        case .transportation:
+            "car.fill"
+        case .housing:
+            "house.fill"
+        case .health:
+            "stethoscope"
+        case .entertainment:
+            "theatermasks.fill"
+        case .lifestyle:
+            "figure.strengthtraining.functional"
         }
     }
     
