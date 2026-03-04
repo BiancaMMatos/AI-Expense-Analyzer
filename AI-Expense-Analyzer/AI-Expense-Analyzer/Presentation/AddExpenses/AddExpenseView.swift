@@ -54,8 +54,9 @@ struct AddExpenseView: View {
                 
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
+                    GridItem(.flexible()),
                     GridItem(.flexible())
-                ]) {
+                ], spacing: 30.0) {
                     ForEach(Category.categories, id: \.self) { category in
                         Button {
                             print("button pressed")
@@ -73,6 +74,7 @@ struct AddExpenseView: View {
                         }
                     }
                 }
+                .padding(50)
             }
             
         }
