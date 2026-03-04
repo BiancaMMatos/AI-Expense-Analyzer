@@ -53,7 +53,7 @@ struct AddExpenseView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color(.systemGray5))
                 .padding(20)
-                .clipShape(RoundedRectangle(cornerRadius: 40))
+                .clipShape(RoundedRectangle(cornerRadius: 80))
             
                 
                 LazyVGrid(columns: [

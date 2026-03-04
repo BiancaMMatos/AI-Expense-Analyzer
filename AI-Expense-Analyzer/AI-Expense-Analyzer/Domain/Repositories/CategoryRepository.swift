@@ -5,6 +5,18 @@
 //  Created by Bianca Maciel on 15/02/26.
 //
 
-protocol CategoryRepositoryProtocol {
+protocol CategoryRepository {
+    func selectCategory()
+}
+
+// MARK: - Default
+struct DefaultCategoryRepository: CategoryRepository {
+    
+    let service: CoreMLService
+    
+    func selectCategory() {
+        service.selectCategory()
+    }
+    
     
 }

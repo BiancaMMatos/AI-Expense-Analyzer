@@ -7,3 +7,6 @@
 
 import Foundation
 
+struct Expense {
+    var value: String
+}

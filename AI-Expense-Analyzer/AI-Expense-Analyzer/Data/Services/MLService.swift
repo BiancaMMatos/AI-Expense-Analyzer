@@ -8,4 +8,5 @@
 
 protocol MLService {
     func generateInsight()
+    func selectCategory()
 }

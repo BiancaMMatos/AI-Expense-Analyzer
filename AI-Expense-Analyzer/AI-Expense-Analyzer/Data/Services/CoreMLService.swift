@@ -7,11 +7,14 @@
 
 import CoreML
 
-
 final class CoreMLService: MLService {
+
     func generateInsight() {
         
     }
     
+    func selectCategory() {
+        
+    }
     
 }
