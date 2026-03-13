@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddExpenseView: View {
     
-    @State private var value: String = ""
+    @State private var value: String = "0"
     @StateObject private var viewModel = AddExpenseViewModelFactory.makeViewModel()
     @Environment(\.colorScheme) private var colorScheme
     

@@ -18,24 +18,18 @@ struct ValueCard: View {
     }
     
     var body: some View {
-        Form {
-            Section {
-                Text("R$" + value)
-                    .font(.callout)
-                    .padding()
-                
-            } header: {
-                Text("Value Informed")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(colorScheme == .dark ? .white : .gray)
-            }
+        Section {
+            Text("R$ " + value)
+                .font(.title)
+                .padding()
             
+        } header: {
+            Text("Value Informed")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundStyle(colorScheme == .dark ? .white : .gray)
         }
-        .scrollContentBackground(.hidden)
-        .background(Color(.systemGray5))
-        .padding(20)
-        .clipShape(RoundedRectangle(cornerRadius: 80))
+        
     }
 }
 

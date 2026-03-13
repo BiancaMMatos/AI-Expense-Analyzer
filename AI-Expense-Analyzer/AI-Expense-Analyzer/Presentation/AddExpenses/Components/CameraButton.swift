@@ -30,7 +30,7 @@ struct CameraButton: View {
                 .clipShape(Circle())
                 .shadow(radius: 5.0)
         }
-        .padding(.top, 20)
+        .padding(20)
     }
 }
 
