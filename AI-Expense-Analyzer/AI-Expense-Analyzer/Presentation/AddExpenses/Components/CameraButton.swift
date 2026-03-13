@@ -1,0 +1,39 @@
+//
+//  CameraButton.swift
+//  AI-Expense-Analyzer
+//
+//  Created by Bianca Maciel on 12/03/26.
+//
+
+import SwiftUI
+
+struct CameraButton: View {
+    
+    private var colorScheme: ColorScheme
+    
+    init(_ colorScheme: ColorScheme) {
+        self.colorScheme = colorScheme
+    }
+    
+    var body: some View {
+        Button {
+            print("camera button pressed")
+            
+        } label: {
+            Image(systemName: "camera.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25, height: 25)
+                .foregroundStyle(colorScheme == .dark ? .white : .black)
+                .padding(20)
+                .background(Color(.systemGray5))
+                .clipShape(Circle())
+                .shadow(radius: 5.0)
+        }
+        .padding(.top, 20)
+    }
+}
+
+#Preview {
+    CameraButton(.dark)
+}
