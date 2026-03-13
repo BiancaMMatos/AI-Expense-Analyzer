@@ -22,7 +22,7 @@ struct AddExpenseView: View {
                         .fontWeight(.bold)
                         .padding(.trailing, 200)
                     
-                    CameraButton(colorScheme)
+                    CameraButton(colorScheme, viewModel)
                     
                     ValueCard(value, colorScheme)
                     

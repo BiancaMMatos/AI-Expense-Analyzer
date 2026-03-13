@@ -16,7 +16,13 @@ final class AddExpenseViewModel: ObservableObject {
         self.categoryUseCase = categoryUseCase
     }
     
-    func selectCategoryFromImage() {
+    func examineImage() {
+        // Apply logic to open camera or gallery in order to examine image
+        // Apply logic that can call function to select category by passing information about image
+        selectCategoryFromImage()
+    }
+    
+    private func selectCategoryFromImage() {
         categoryUseCase.selectCategory()
     }
     

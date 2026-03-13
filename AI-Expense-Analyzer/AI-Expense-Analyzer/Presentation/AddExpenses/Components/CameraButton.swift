@@ -10,14 +10,16 @@ import SwiftUI
 struct CameraButton: View {
     
     private var colorScheme: ColorScheme
+    private var viewModel: AddExpenseViewModel
     
-    init(_ colorScheme: ColorScheme) {
+    init(_ colorScheme: ColorScheme, _ viewModel: AddExpenseViewModel) {
         self.colorScheme = colorScheme
+        self.viewModel = viewModel
     }
     
     var body: some View {
         Button {
-            print("camera button pressed")
+            viewModel.examineImage()
             
         } label: {
             Image(systemName: "camera.fill")
@@ -35,5 +37,5 @@ struct CameraButton: View {
 }
 
 #Preview {
-    CameraButton(.dark)
+    CameraButton(.dark, AddExpenseViewModelFactory.makeViewModel())
 }
