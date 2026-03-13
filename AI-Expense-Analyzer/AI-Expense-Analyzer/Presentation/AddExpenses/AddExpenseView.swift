@@ -65,7 +65,7 @@ struct AddExpenseView: View {
                     ], spacing: 30.0) {
                         ForEach(Category.categories, id: \.self) { category in
                             Button {
-                                print("category button selected")
+                                print("\(category) category button selected")
                                 viewModel.selectCategoryFromImage()
                                 
                             } label: {
