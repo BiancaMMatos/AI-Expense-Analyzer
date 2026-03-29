@@ -5,10 +5,10 @@
 //  Created by Bianca Maciel on 15/02/26.
 //
 
-import Foundation
+import UIKit
 
 protocol CategoryUseCaseProtocol {
-    func selectCategory()
+    func selectCategory(from image: UIImage) async throws -> Any
 }
 
 
@@ -20,7 +20,7 @@ struct CategoryUseCase: CategoryUseCaseProtocol {
         self.repository = repository
     }
     
-    func selectCategory() {
-        repository.selectCategory()
+    func selectCategory(from image: UIImage) async throws -> Any {
+        return try await repository.selectCategory(from: image)
     }
 }

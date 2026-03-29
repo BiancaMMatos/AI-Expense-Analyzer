@@ -15,7 +15,10 @@ class HomeViewModel: ObservableObject {
         self.generateInsightUseCase = generateInsightUseCase
     }
     
-    func loadInsight() {
-        generateInsightUseCase?.generateInsight()
+    func showInsight() -> Insight {
+        guard let generateInsightUseCase else {
+           return Insight(text: "No data found")
+        }
+        return generateInsightUseCase.generateInsight()
     }
 }

@@ -5,8 +5,7 @@
 //  Created by Bianca Maciel on 23/02/26.
 //
 
-import SwiftUI
-
+import UIKit
 
 protocol OCRService {
     /// OCR stands for 'Optical Character Recognition' which it's responsible for

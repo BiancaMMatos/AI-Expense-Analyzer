@@ -5,17 +5,25 @@
 //  Created by Bianca Maciel on 15/02/26.
 //
 
+import UIKit
+
 protocol CategoryRepository {
-    func selectCategory()
+    func selectCategory(from image: UIImage) async throws -> Any
 }
 
 // MARK: - Default
 struct DefaultCategoryRepository: CategoryRepository {
     
-    let service: CoreMLService
+    let service: OCRService
     
-    func selectCategory() {
-        service.selectCategory()
+    func selectCategory(from image: UIImage) async throws -> Any {
+        do {
+            let result = try await service.extractText(from: image)
+            return result
+            
+        } catch {
+            throw error
+        }
     }
     
     
