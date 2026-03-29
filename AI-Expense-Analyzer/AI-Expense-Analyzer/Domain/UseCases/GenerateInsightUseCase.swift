@@ -8,9 +8,9 @@
 import Foundation
 
 struct GenerateInsightUseCase {
-    private var repository: ExpenseRepositoryProtocol
+    private var repository: InsightExpenseRepositoryProtocol
     
     func generateInsight() {
-        repository.fetchInsitedExpenses()
+        repository.fetchInsightFromExpenses()
     }
 }

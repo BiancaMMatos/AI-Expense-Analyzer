@@ -10,3 +10,19 @@ import Foundation
 protocol ExpenseUseCase {
     func saveExpense()
 }
+
+
+struct DefaultSaveExpenseUseCase: ExpenseUseCase {
+    
+    let repository: ExpenseRepository
+    
+    init(repository: ExpenseRepository) {
+        self.repository = repository
+    }
+    
+    func saveExpense() {
+        repository
+    }
+    
+    
+}

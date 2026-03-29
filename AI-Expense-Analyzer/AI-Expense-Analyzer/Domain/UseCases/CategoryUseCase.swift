@@ -7,6 +7,20 @@
 
 import Foundation
 
-protocol CategoryUseCase {
+protocol CategoryUseCaseProtocol {
     func selectCategory()
+}
+
+
+struct CategoryUseCase: CategoryUseCaseProtocol {
+    
+    let repository: CategoryRepository
+    
+    init(repository: CategoryRepository) {
+        self.repository = repository
+    }
+    
+    func selectCategory() {
+        repository.selectCategory()
+    }
 }
