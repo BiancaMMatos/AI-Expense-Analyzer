@@ -14,12 +14,15 @@ protocol CategoryRepository {
 // MARK: - Default
 struct DefaultCategoryRepository: CategoryRepository {
     
-    let service: OCRService
+    let ocrService: OCRService
+    let mlService: MLService
     
     func selectCategory(from image: UIImage) async throws -> Any {
         do {
-            let result = try await service.extractText(from: image)
-            return result
+            let ocrResult = try await ocrService.extractText(from: image)
+            let mlResult = try await mlService.classify(text: ocrResult)
+            
+            return mlResult
             
         } catch {
             throw error
