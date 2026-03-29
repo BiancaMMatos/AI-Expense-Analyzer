@@ -12,29 +12,29 @@ import Vision
 final class VisionService: OCRService {
     func extractText(from image: UIImage) async throws -> String {
         
-        /// Preparing image; converting UIImage to CGImage
+        /// 1. Preparing image; converting UIImage to CGImage
+        guard let cgImage = image.cgImage else {
+            throw OCRServiceError.invalidImage
+        }
+        
+        /// 2. Creating text request
+        let request = VNRecognizeTextRequest()
+        request.recognitionLevel = .accurate
+        request.usesLanguageCorrection = true
+        
+        /// 3. Executing OCR on image
+        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        try handler.perform([request])
+        
+        /// 4. Extracting knowns texts
+        let observations = request.results ?? []
+        let lines = observations.compactMap { $0.topCandidates(1).first?.string }
+        
+        /// 5. Joining in a single string
+        let fullText = lines.joined(separator: "\n")
         
         
-        /// Creating text request
-        
-        
-        /// Executing request
-        
-        
-        /// Extracting text
-        
-        
-        /// Normalizing text
-        
-        
-        /// Handling errors
-        
-        
-        return ""
-    }
-    
-    private func normalize() {
-        
+        return fullText
     }
     
     

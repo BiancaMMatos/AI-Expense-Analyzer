@@ -34,11 +34,11 @@ protocol InsightService {
 
 // MARK: - Errors
 enum OCRServiceError: Error {
-    case invalidImage
+    case invalidImage, visionFailed
 }
 
 enum MKServiceError: Error {
-    case invalidText
+    case invalidText, coreMLFailed
 }
 
 enum InsightServiceError: Error {
