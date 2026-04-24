@@ -21,7 +21,7 @@ struct DefaultSaveExpenseUseCase: ExpenseUseCase {
     }
     
     func saveExpense() {
-        repository
+        repository.save()
     }
     
     

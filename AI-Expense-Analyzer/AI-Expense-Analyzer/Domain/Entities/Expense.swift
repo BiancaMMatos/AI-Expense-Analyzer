@@ -9,4 +9,5 @@ import Foundation
 
 struct Expense {
     var value: String
+    var category: Category
 }

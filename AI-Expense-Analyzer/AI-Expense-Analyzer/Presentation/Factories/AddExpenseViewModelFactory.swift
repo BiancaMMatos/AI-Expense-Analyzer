@@ -9,10 +9,11 @@
 struct AddExpenseViewModelFactory {
     
     static func makeViewModel() -> AddExpenseViewModel {
+        let visionService = VisionService()
         let coreMLService = CoreMLService()
         let coreDataService = CoreDataService()
         
-        let categoryRepository = DefaultCategoryRepository(service: coreMLService)
+        let categoryRepository = DefaultCategoryRepository(ocrService: visionService, mlService: coreMLService)
         let expenseRepository = ExpenseRepository(service: coreDataService)
         
         let categoryUseCase = CategoryUseCase(repository: categoryRepository)

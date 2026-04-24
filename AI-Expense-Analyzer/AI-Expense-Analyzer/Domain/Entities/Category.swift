@@ -41,14 +41,19 @@ enum Category: String {
         switch self {
         case .food:
             "fork.knife"
+            
         case .transportation:
             "car.fill"
+            
         case .housing:
             "house.fill"
+            
         case .health:
             "stethoscope"
+            
         case .entertainment:
             "theatermasks.fill"
+            
         case .lifestyle:
             "figure.strengthtraining.functional"
         }

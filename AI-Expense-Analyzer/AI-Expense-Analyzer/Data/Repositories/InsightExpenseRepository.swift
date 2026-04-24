@@ -6,18 +6,12 @@
 //
 
 
-protocol InsightExpenseRepositoryProtocol {
-    func fetchInsightFromExpenses()
-}
-
-
 struct InsightExpenseRepository: InsightExpenseRepositoryProtocol {
     
-    private let service: MLService
+    private let service: InsightService
     
-    func fetchInsightFromExpenses() {
-        service.generateInsight()
+    func getInsight(from expenses: [Expense]) -> Insight {
+        service.generateInsight(from: expenses)
     }
-    
     
 }

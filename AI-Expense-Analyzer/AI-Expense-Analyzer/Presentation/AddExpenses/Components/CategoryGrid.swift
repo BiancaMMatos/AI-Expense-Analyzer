@@ -26,7 +26,7 @@ struct CategoryGrid: View {
             ForEach(Category.categories, id: \.self) { category in
                 Button {
                     print("\(category) category button selected")
-                    viewModel.selectCategoryFromImage()
+                    viewModel.examineImage()
                     
                 } label: {
                     Image(systemName: category.icon)
