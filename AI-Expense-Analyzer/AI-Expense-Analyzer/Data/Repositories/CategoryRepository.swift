@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol CategoryRepository {
-    func selectCategory(from image: UIImage) async throws -> Any
-}
-
 // MARK: - Default
 struct DefaultCategoryRepository: CategoryRepository {
     

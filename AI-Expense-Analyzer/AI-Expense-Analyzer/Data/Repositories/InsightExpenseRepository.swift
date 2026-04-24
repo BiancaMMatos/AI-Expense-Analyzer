@@ -6,11 +6,6 @@
 //
 
 
-protocol InsightExpenseRepositoryProtocol {
-    func getInsight(from expenses: [Expense]) -> Insight
-}
-
-
 struct InsightExpenseRepository: InsightExpenseRepositoryProtocol {
     
     private let service: InsightService

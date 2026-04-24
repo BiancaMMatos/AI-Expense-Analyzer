@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol ExpenseRepositoryProtocol {
-    func save()
-}
-
 
 struct ExpenseRepository: ExpenseRepositoryProtocol {
     
