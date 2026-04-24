@@ -9,7 +9,7 @@ import Foundation
 
 struct GenerateInsightUseCase {
     private var repository: InsightExpenseRepositoryProtocol
-    var expenses: [Expense]
+    private var expenses: [Expense]
     
     
     func generateInsight() -> Insight {

@@ -19,11 +19,17 @@ struct ExpenseCard: View {
                 .frame(height: 150.0)
                 .accessibilityIdentifier("expenseCard:\(category.rawValue)")
             
-            Text(category.rawValue.capitalized)
-                .font(.title2)
-                .fontWeight(.heavy)
-                .foregroundStyle(.white)
-                .lineLimit(0)
+            VStack {
+                Image(systemName: category.icon)
+                    .scaledToFill()
+                    .tint(.black)
+                
+                Text(category.rawValue.capitalized)
+                    .font(.callout)
+                    .fontWeight(.heavy)
+                    .foregroundStyle(.black)
+                    .lineLimit(0)
+            }
             
         }
         
