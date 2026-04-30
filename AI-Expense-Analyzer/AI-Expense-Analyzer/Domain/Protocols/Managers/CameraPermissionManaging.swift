@@ -1,5 +1,5 @@
 //
-//  CameraPermissionManager.swift
+//  CameraPermissionManaging.swift
 //  AI-Expense-Analyzer
 //
 //  Created by Bianca Maciel on 23/04/26.

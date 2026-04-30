@@ -10,6 +10,10 @@ import Vision
 
 
 final class VisionService: OCRService {
+    func extractText(from imageData: Data) async throws -> String {
+        "oi"
+    }
+    
     func extractText(from image: UIImage) async throws -> String {
         
         /// 1. Preparing image; converting UIImage to CGImage

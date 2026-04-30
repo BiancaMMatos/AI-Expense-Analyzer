@@ -2,9 +2,13 @@
 //  Insight.swift
 //  AI-Expense-Analyzer
 //
-//  Created by Bianca Maciel on 29/03/26.
+//  Created by Bianca Maciel on 29/04/26.
 //
 
+import Foundation
+
 struct Insight {
-    var text: String
+    let totalSpent: Double
+    let topCategory: Category
+    let totalReceiptsScanned: Int
 }
