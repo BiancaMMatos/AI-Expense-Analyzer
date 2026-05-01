@@ -10,13 +10,13 @@ import SwiftUI
 struct HomeView: View {
     
     @Environment(\.colorScheme) private var colorScheme
-    @StateObject private var vm = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.systemBackground)
-                .ignoresSafeArea()
+                    .ignoresSafeArea()
                 
                 VStack(alignment: .center) {
                     Text("Hello, Bianca!")
@@ -25,10 +25,23 @@ struct HomeView: View {
                         .padding(.leading, -150)
                         .padding(.top, 1)
                     
-                    InsightCard()
-                        .padding(.top, 10)
-                        .padding(.bottom, -10)
-                        .accessibilityIdentifier("homeView:insightCard")
+                    InsightCard(
+                        title: "Total Spend",
+                        value: viewModel.totalSpentFormatted,
+                        subtitle: viewModel.scannedReceiptsCount
+                    )
+                    .padding(.top, 10)
+                    .padding(.bottom, -10)
+                    .accessibilityIdentifier("homeView:insightCard:total_spend")
+                    
+                    InsightCard(
+                        title: "Most Spend",
+                        value: viewModel.topCategoryName,
+                        subtitle: "Category"
+                    )
+                    .padding(.top, 10)
+                    .padding(.bottom, -10)
+                    .accessibilityIdentifier("homeView:insightCard:most_spend")
                     
                     ScrollView(.vertical) {
                         
@@ -64,8 +77,4 @@ struct HomeView: View {
         }
         
     }
-}
-
-#Preview {
-    HomeView()
 }
