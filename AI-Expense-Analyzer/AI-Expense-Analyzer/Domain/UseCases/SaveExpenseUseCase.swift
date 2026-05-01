@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Register expense
+/// Goal: Register expense
 protocol SaveExpenseUseCaseProtocol {
     func execute(amount: Double, category: Category) throws
 }
@@ -22,19 +22,19 @@ struct SaveExpenseUseCase: SaveExpenseUseCaseProtocol {
     
     func execute(amount: Double, category: Category) throws {
         
-        /// Business Logic: Not allowing expenses with zero or negative amount
+        // Business Logic: Not allowing expenses with zero or negative amount
         guard amount > 0 else {
             throw NSError(domain: "InvalidAmount", code: 0, userInfo: [NSLocalizedDescriptionKey: "The expense value should be greater than zero."])
         }
         
-        /// Create entity
+        // Create entity
         let expense = Expense(id: UUID(),
                               amount: amount,
                               category: category,
                               date: Date()
         )
         
-        /// Let repository save (it will convert to CoreDate inside)
+        // Let repository save (it will convert to CoreDate inside)
         try repository.save(expense: expense)
         
     }

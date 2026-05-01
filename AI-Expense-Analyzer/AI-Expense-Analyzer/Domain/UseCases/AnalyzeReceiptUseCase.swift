@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// UseCase protocol
+/// Goal: 
 protocol AnalyzeReceiptUseCaseProtocol {
     func execute(imageData: Data) async throws -> ReceiptAnalysisResult
 }
@@ -15,7 +15,7 @@ protocol AnalyzeReceiptUseCaseProtocol {
 // MARK: - UseCase
 struct AnalyzeReceiptUseCase: AnalyzeReceiptUseCaseProtocol {
     
-    /// Dependency Injection
+    // MARK: -  Dependency Injection
     private let ocrService: OCRService
     private let mlService: MLService
     
@@ -25,17 +25,17 @@ struct AnalyzeReceiptUseCase: AnalyzeReceiptUseCaseProtocol {
     }
     
     func execute(imageData: Data) async throws -> ReceiptAnalysisResult {
-        /// Extract full text from image
+        // Extract full text from image
         let fullText = try await ocrService.extractText(from: imageData)
         
-        /// Classify category from text
+        // Classify category from text
         let category = try await mlService.classify(text: fullText)
         
         
-        /// Extract amount using business logic
+        // Extract amount using business logic
         let value = extractMonetaryValue(from: fullText)
         
-        /// Returns package ready for ViewModel
+        // Returns package ready for ViewModel
         return ReceiptAnalysisResult(extractedValue: value, category: category)
         
     }
@@ -50,7 +50,6 @@ struct AnalyzeReceiptUseCase: AnalyzeReceiptUseCaseProtocol {
                 let nsString = text as NSString
                 let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
                 
-                // Assume que o valor total é geralmente o último valor monetário na fatura
                 if let lastMatch = results.last {
                     let valueString = nsString.substring(with: lastMatch.range)
                     let cleanString = valueString.replacingOccurrences(of: ",", with: ".")

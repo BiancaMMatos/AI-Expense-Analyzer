@@ -36,10 +36,10 @@ final class HomeViewModel: ObservableObject {
         
         do {
             
-            /// 1. Getting data
+            // 1. Getting data
             let insight = try generateInsightUseCase.execute()
             
-            /// 2. Formating it
+            // 2. Formating it
             self.totalSpentFormatted = formatCurrency(insight.totalSpent)
             self.topCategoryName = insight.topCategory.rawValue
             self.scannedReceiptsCount = "\(insight.totalReceiptsScanned) notes processed."
@@ -55,7 +55,7 @@ final class HomeViewModel: ObservableObject {
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "pt_BR")
         
-        /// If formatter fails, it will have a safe fallback
+        // If formatter fails, it will have a safe fallback
         return formatter.string(from: NSNumber(value: value)) ?? "R$ \(String(format: "%.2f", value))"
     }
     

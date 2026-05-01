@@ -8,18 +8,32 @@
 import CoreML
 import NaturalLanguage
 
-final class CoreMLCategoryService: MLService {
+final class CoreMLCategoryClassifier: MLService {
+    
     func classify(text: String) async throws -> Category {
-        // TODO: Add Logic
-        /// Import ML model from Apple; pass 'text' and it returns which 'Category' it think it is
         
-        /// Example:
-        if text.lowercased().contains("restaurant") || text.lowercased().contains("ifood") {
+        // TODO: Adjust Logic
+        
+        let lowercasedText = text.lowercased()
+        
+        let foodKeywords = ["restaurante", "ifood", "mercado", "padaria", "supermercado", "lanchonete", "burger", "pizza"]
+        let transportKeywords = ["uber", "99", "posto", "combustível", "gasolina", "estacionamento", "pedágio"]
+        let healthKeywords = ["farmácia", "drogaria", "hospital", "clínica", "consulta", "exame"]
+        let educationKeywords = ["escola", "faculdade", "curso", "livraria", "udemy"]
+        
+        if foodKeywords.contains(where: lowercasedText.contains) {
             return .food
+        } else if transportKeywords.contains(where: lowercasedText.contains) {
+            return .transportation
+        } else if healthKeywords.contains(where: lowercasedText.contains) {
+            return .health
+        } else if educationKeywords.contains(where: lowercasedText.contains) {
+            return .education
         }
+        
         
         return .others
     }
-
+    
     
 }
