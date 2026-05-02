@@ -8,43 +8,60 @@
 import SwiftUI
 
 struct CategoryGrid: View {
+    // Binding creates a connection with ViewModel
+    @Binding var selectedCategory: Category
     
-    private var colorScheme: ColorScheme
-    private var viewModel: AddExpenseViewModel
-    
-    init(_ colorScheme: ColorScheme, _ viewModel: AddExpenseViewModel) {
-        self.colorScheme = colorScheme
-        self.viewModel = viewModel
-    }
+    // Define layout grid
+    private let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
-        LazyVGrid(columns: [
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ], spacing: 30.0) {
-            ForEach(Category.categories, id: \.self) { category in
-                Button {
-                    print("\(category) category button selected")
-                    viewModel.examineImage()
-                    
-                } label: {
-                    Image(systemName: category.icon)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .foregroundStyle(colorScheme == .dark ? .white : .black)
-                        .padding(20)
-                        .background(Color(.systemGray5))
-                        .clipShape(Circle())
-                        .shadow(radius: 5.0)
+        LazyVGrid(columns: columns, spacing: 16) {
+            // Category.allCases works perfectly because the Enum assigns CaseIterable
+            ForEach(Category.allCases) { category in
+                CategoryItem(
+                    title: category.rawValue,
+                    isSelected: category == selectedCategory
+                )
+                .onTapGesture {
+                    // Update selection with smooth animation
+                    withAnimation(.spring()) {
+                        selectedCategory = category
+                    }
                 }
             }
         }
-        .padding(50)
+        .padding()
+    }
+}
+
+private struct CategoryItem: View {
+    let title: String
+    let isSelected: Bool
+    
+    var body: some View {
+        Text(title)
+            .font(.subheadline.weight(.semibold))
+            .foregroundColor(isSelected ? .white : .primary)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(isSelected ? Color.blue : Color.gray.opacity(0.1))
+            )
+            .shadow(color: isSelected ? Color.blue.opacity(0.3) : .clear, radius: 4, y: 2)
     }
 }
 
 #Preview {
-    CategoryGrid(.dark, AddExpenseViewModelFactory.makeViewModel())
+    struct CategoryGridPreview: View {
+        @State private var previewCategory: Category = .food
+        
+        var body: some View {
+            CategoryGrid(selectedCategory: $previewCategory)
+        }
+    }
+    return CategoryGridPreview()
 }

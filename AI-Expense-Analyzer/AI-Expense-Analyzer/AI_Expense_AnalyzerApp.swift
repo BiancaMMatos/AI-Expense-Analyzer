@@ -14,7 +14,7 @@ struct AI_Expense_AnalyzerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            HomeView(viewModel: HomeViewModelFactory.make(context: persistenceController.container.viewContext))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
