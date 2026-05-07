@@ -6,7 +6,7 @@
 //
 
 
-struct InsightExpenseRepository: InsightExpenseRepositoryProtocol {
+struct InsightExpenseRepository {
     
     private let service: InsightService
     

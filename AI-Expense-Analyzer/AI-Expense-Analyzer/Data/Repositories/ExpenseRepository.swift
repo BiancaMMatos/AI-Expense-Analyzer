@@ -9,15 +9,16 @@ import Foundation
 
 
 struct ExpenseRepository: ExpenseRepositoryProtocol {
-    
-    let service: CoreDataService
-    
-    init(service: CoreDataService) {
-        self.service = service
+    func save(expense: Expense) throws {
+        
     }
     
-    func save() {
-        service.saveData()
+    func fetchAllExpenses() throws -> [Expense] {
+        []
+    }
+    
+    func delete(expense: Expense) throws {
+        
     }
     
     

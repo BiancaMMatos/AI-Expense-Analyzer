@@ -1,5 +1,5 @@
 //
-//  CategoryRepository.swift
+//  CategoryRepositoryProtocol.swift
 //  AI-Expense-Analyzer
 //
 //  Created by Bianca Maciel on 23/04/26.
@@ -8,5 +8,5 @@
 import UIKit
 
 protocol CategoryRepository {
-    func selectCategory(from image: UIImage) async throws -> Any
+    func fetchCategories() throws -> [Category]
 }

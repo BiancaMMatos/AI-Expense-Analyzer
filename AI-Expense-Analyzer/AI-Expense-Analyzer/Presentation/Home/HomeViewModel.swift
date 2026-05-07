@@ -6,19 +6,57 @@
 //
 
 import Combine
+import Foundation
 
-class HomeViewModel: ObservableObject {
+@MainActor
+final class HomeViewModel: ObservableObject {
     
-    private var generateInsightUseCase: GenerateInsightUseCase?
+    // MARK: - States of View
+    @Published var totalSpentFormatted: String = "R$ 0,00"
+    @Published var topCategoryName: String = "None"
+    @Published var scannedReceiptsCount: String = "0 notes processed"
     
-    init(generateInsightUseCase: GenerateInsightUseCase? = nil) {
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String? = nil
+    
+    
+    // MARK: - Dependencies
+    private let generateInsightUseCase: GenerateInsightUseCaseProtocol
+    
+    
+    // MARK: - Init
+    init(generateInsightUseCase: GenerateInsightUseCaseProtocol) {
         self.generateInsightUseCase = generateInsightUseCase
     }
     
-    func showInsight() -> Insight {
-        guard let generateInsightUseCase else {
-           return Insight(text: "No data found")
+    // MARK: - Actions
+    func fetchInsight() {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            
+            // 1. Getting data
+            let insight = try generateInsightUseCase.execute()
+            
+            // 2. Formating it
+            self.totalSpentFormatted = formatCurrency(insight.totalSpent)
+            self.topCategoryName = insight.topCategory.rawValue
+            self.scannedReceiptsCount = "\(insight.totalReceiptsScanned) notes processed."
+            
+        } catch {
+            self.errorMessage = "Error loading insights:\(error.localizedDescription)"
         }
-        return generateInsightUseCase.generateInsight()
     }
+    
+    // MARK: - Helpers Privados
+    private func formatCurrency(_ value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "pt_BR")
+        
+        // If formatter fails, it will have a safe fallback
+        return formatter.string(from: NSNumber(value: value)) ?? "R$ \(String(format: "%.2f", value))"
+    }
+    
 }

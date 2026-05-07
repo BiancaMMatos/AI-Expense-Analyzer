@@ -5,37 +5,19 @@
 //  Created by Bianca Maciel on 15/02/26.
 //
 
-import SwiftUI
+import Foundation
 
-enum Category: String {
-    case food
-    case transportation
-    case housing
-    case health
-    case entertainment
-    case lifestyle
+enum Category: String, CaseIterable, Identifiable {
+    case food = "Food"
+    case transportation = "Transportation"
+    case health = "Health"
+    case education = "Education"
+    case housing = "Housing"
+    case entertainment = "Entertainment"
+    case lifestyle = "Lifestyle"
+    case others = "Others"
     
-    var color: Color {
-        switch self {
-        case .food:
-                .init(.systemYellow)
-            
-        case .transportation:
-                .init(.systemGreen)
-            
-        case .housing:
-                .init(.systemBlue)
-            
-        case .health:
-                .init(.systemRed)
-            
-        case .entertainment:
-                .init(.systemOrange)
-            
-        case .lifestyle:
-                .init(.systemPurple)
-        }
-    }
+    var id: String { self.rawValue }
     
     var icon: String {
         switch self {
@@ -56,13 +38,18 @@ enum Category: String {
             
         case .lifestyle:
             "figure.strengthtraining.functional"
+            
+        case .others:
+            "ellipsis"
+            
+        case .education:
+            "graduationcap.fill"
         }
+        
     }
     
     static let categories: [Category] = [
-        Category.food, Category.transportation, Category.housing, Category.health, Category.entertainment, Category.lifestyle
+        Category.food, Category.transportation, Category.housing, Category.health, Category.entertainment, Category.lifestyle, Category.education, Category.others
     ]
-
+    
 }
-
-

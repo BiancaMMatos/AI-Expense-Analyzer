@@ -9,34 +9,42 @@ import SwiftUI
 
 struct SaveButton: View {
     
-    private var viewModel: AddExpenseViewModel
-    
-    init(_ viewModel: AddExpenseViewModel) {
-        self.viewModel = viewModel
-    }
+    var title: String = "Save Expense"
+    var isSaving: Bool // Receives ViewModel if has to save
+    var action: () -> Void
     
     var body: some View {
-        Button {
-            print("Saved")
-            viewModel.saveExpense()
+        Button(action: {
             
-        } label: {
+            if !isSaving { // Only executes if NOT have to save
+                action()
+            }
+        }) {
             ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(isSaving ? Color.blue.opacity(0.6) : Color.blue)
+                    .frame(height: 56)
+                    .frame(maxWidth: .infinity)
                 
-                Text("Save")
-                    .font(.title3)
-                    .fontWeight(.medium)
-                    .tint(.black)
-                    .padding(.horizontal, 50)
-                    .padding(15)
-                    .background(Color(.systemYellow))
-                    .clipShape(RoundedRectangle(cornerRadius: 50.0))
-                    .accessibilityIdentifier("addExpense:saveButton")
+                if isSaving {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                } else {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                }
             }
         }
+        .disabled(isSaving)
+        .animation(.easeInOut, value: isSaving)
     }
 }
 
 #Preview {
-    SaveButton(AddExpenseViewModelFactory.makeViewModel())
+    VStack(spacing: 20) {
+        SaveButton(isSaving: false, action: {})
+        SaveButton(isSaving: true, action: {})
+    }
+    .padding()
 }

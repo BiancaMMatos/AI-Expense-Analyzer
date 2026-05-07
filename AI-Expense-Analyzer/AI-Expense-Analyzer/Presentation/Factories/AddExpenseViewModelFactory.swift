@@ -6,22 +6,26 @@
 //
 
 
-struct AddExpenseViewModelFactory {
+import CoreData
+
+enum AddExpenseViewModelFactory {
     
-    static func makeViewModel() -> AddExpenseViewModel {
-        let visionService = VisionService()
-        let coreMLService = CoreMLService()
-        let coreDataService = CoreDataService()
+    @MainActor
+    static func make(context: NSManagedObjectContext) -> AddExpenseViewModel {
         
-        let categoryRepository = DefaultCategoryRepository(ocrService: visionService, mlService: coreMLService)
-        let expenseRepository = ExpenseRepository(service: coreDataService)
+        // 1. Instance of all Services and Repositories (Data Layer)
+        let ocrService = VisionOCRService()
+        let mlService = CoreMLCategoryClassifier()
+        let repository = CoreDataExpenseRepository(context: context)
         
-        let categoryUseCase = CategoryUseCase(repository: categoryRepository)
-        let expenseUseCase = DefaultSaveExpenseUseCase(repository: expenseRepository)
+        // 2. Instance of Use Cases by injecting Services on them (Domain Layer)
+        let analyzeUseCase = AnalyzeReceiptUseCase(ocrService: ocrService, mlService: mlService)
+        let saveUseCase = SaveExpenseUseCase(repository: repository)
         
-        let viewModel = AddExpenseViewModel(expenseUseCase: expenseUseCase, categoryUseCase: categoryUseCase)
-        
-        return viewModel
+        // 3. Returns ViewModel
+        return AddExpenseViewModel(
+            analyzeReceiptUseCase: analyzeUseCase,
+            saveExpenseUseCase: saveUseCase
+        )
     }
-    
 }

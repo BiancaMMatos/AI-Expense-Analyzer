@@ -9,33 +9,28 @@ import SwiftUI
 
 struct CameraButton: View {
     
-    private var colorScheme: ColorScheme
-    private var viewModel: AddExpenseViewModel
-    
-    init(_ colorScheme: ColorScheme, _ viewModel: AddExpenseViewModel) {
-        self.colorScheme = colorScheme
-        self.viewModel = viewModel
-    }
+    var action: () -> Void
     
     var body: some View {
-        Button {
-            viewModel.examineImage()
-            
-        } label: {
-            Image(systemName: "camera.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 25, height: 25)
-                .foregroundStyle(colorScheme == .dark ? .white : .black)
-                .padding(20)
-                .background(Color(.systemGray5))
-                .clipShape(Circle())
-                .shadow(radius: 5.0)
+        Button(action: {
+            action() // Reacts alert to whom called
+        }) {
+            ZStack {
+                Circle()
+                    .fill(Color.blue)
+                    .frame(width: 70, height: 70)
+                    .shadow(radius: 5)
+                
+                Image(systemName: "camera.fill")
+                    .font(.title)
+                    .foregroundColor(.white)
+            }
         }
-        .padding(20)
     }
 }
 
 #Preview {
-    CameraButton(.dark, AddExpenseViewModelFactory.makeViewModel())
+    CameraButton(action: {
+        print("Camera button clicked!")
+    })
 }

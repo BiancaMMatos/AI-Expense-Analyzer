@@ -14,10 +14,15 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        
+        // Creating 5 mocked expenses using Expense Entity
+        for i in 0..<5 {
+                    let newExpense = ExpenseEntity(context: viewContext)
+                    newExpense.id = UUID()
+                    newExpense.amount = Double((i + 1) * 25)
+                    newExpense.date = Date()
+                    newExpense.categoryString = "Food"
+                }
         do {
             try viewContext.save()
         } catch {

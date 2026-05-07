@@ -5,15 +5,15 @@
 //  Created by Bianca Maciel on 23/02/26.
 //
 
-import UIKit
+import Foundation
 
 // MARK: - Protocols
 protocol OCRService {
     /// OCR stands for 'Optical Character Recognition' which it's responsible for
     /// extract text from the image.
-    /// - Parameter image: image that will be analyzed
+    /// - Parameter imageData: image that will be analyzed
     /// - Returns: text extracted from image
-    func extractText(from image: UIImage) async throws -> String
+    func extractText(from imageData: Data) async throws -> String
 }
 
 protocol MLService {

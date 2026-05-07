@@ -7,65 +7,42 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
-    
-    @Environment(\.colorScheme) private var colorScheme
-    @StateObject private var vm = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color(.systemBackground)
-                .ignoresSafeArea()
+        NavigationView {
+            VStack(spacing: 20) {
                 
-                VStack(alignment: .center) {
-                    Text("Hello, Bianca!")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding(.leading, -150)
-                        .padding(.top, 1)
+                if viewModel.isLoading {
+                    ProgressView("Loading insights...")
+                } else if let errorMessage = viewModel.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                } else {
+                    InsightCard(
+                        title: "Total Spend",
+                        value: viewModel.totalSpentFormatted,
+                        subtitle: viewModel.scannedReceiptsCount
+                    )
+                    .accessibilityIdentifier("homeView:insightCard:total_spend")
                     
-                    InsightCard()
-                        .padding(.top, 10)
-                        .padding(.bottom, -10)
-                        .accessibilityIdentifier("homeView:insightCard")
-                    
-                    ScrollView(.vertical) {
-                        
-                        LazyVGrid(columns: [
-                            GridItem(.flexible()),
-                            GridItem(.flexible())
-                        ], content: {
-                            ForEach(Category.categories, id: \.self) { category in
-                                NavigationLink(destination: ExpensesCategoryView(category: category)) {
-                                    ExpenseCard(category: category )
-                                        .padding(.horizontal, 10)
-                                }
-                            }
-                        })
-                        
-                    }
-                    .padding(.top, -60)
-                    .padding(.bottom, -10)
-                    
+                    InsightCard(
+                        title: "Most Expended",
+                        value: viewModel.topCategoryName,
+                        subtitle: "Category"
+                    )
+                    .accessibilityIdentifier("homeView:insightCard:most_expended")
                 }
-                .toolbar {
-                    ToolbarItem {
-                        NavigationLink {
-                            AddExpenseView()
-                                .accessibilityIdentifier("homeView:addExpense")
-                        } label: {
-                            Image(systemName: "plus")
-                                .foregroundStyle(colorScheme == .dark ? .white : .black)
-                        }
-                    }
-                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("My Insights")
+            .onAppear {
+                viewModel.fetchInsight()
             }
         }
-        
     }
-}
-
-#Preview {
-    HomeView()
 }
